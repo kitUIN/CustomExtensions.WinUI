@@ -44,4 +44,27 @@ public static class WinUIExtensions
 	{
 		return new BitmapImage(new Uri(AssetPath(path)));
 	}
+	public static BitmapImage ImageSource(this string path, Type type)
+	{
+		return new BitmapImage(new Uri(AssetPath(path, type)));
+	}
+
+	public static BitmapImage ImageSource<T>(this string path, T t)
+	{
+		return new BitmapImage(new Uri(AssetPath(path, t)));
+	}
+	public static Uri AssetUri(this string path)
+	{
+		return new Uri(AssetPath(path));
+	}
+
+	public static Uri AssetUri(this string path, Type type)
+	{
+		return new Uri(AssetPath(path, type));
+	}
+
+	public static Uri AssetUri<T>(this string path, T t)
+	{
+		return new Uri(AssetPath(path, t));
+	}
 }
