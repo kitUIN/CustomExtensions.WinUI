@@ -47,4 +47,8 @@ internal partial class ApplicationExtensionHostSingleton<T> : IApplicationExtens
 		_ = AssembliesByAssemblyName.AddOrUpdate(asm.ForeignAssembly.GetName().FullName, asm, (_, _) => asm);
 		return asm;
 	}
+	public string LocateResourcePrefix(AssemblyName assemblyName)
+	{
+		return GetExtensionAssembly(assemblyName).SourceResourcePrefix;
+	}
 }

@@ -8,6 +8,7 @@ internal partial class ExtensionAssembly
 	{
 		return new Uri($"ms-appx:///{LocateResourcePath(component, callerFilePath).Replace('\\', '/')}");
 	}
+	public string SourceResourcePrefix => $"ms-appx:///{Path.Combine(ForeignAssemblyDir, ForeignAssemblyName).Replace('\\', '/')}";
 
 	private string LocateResourcePath(object component, [CallerFilePath] string callerFilePath = "")
 	{
