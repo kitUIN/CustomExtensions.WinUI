@@ -20,9 +20,9 @@ public static class WinUIExtensions
 		Application.LoadComponent(component, resourceLocator, ComponentResourceLocation.Nested);
 	}
 
-	public static string AssetPath(this string path)
+	public static string AssetPath(this string path,int skip = 2)
 	{
-		var callerMethod = new StackFrame(2, false)?.GetMethod();
+		var callerMethod = new StackFrame(skip, false).GetMethod();
 		if (callerMethod != null && callerMethod.DeclaringType != null)
 			return ApplicationExtensionHost.Current.LocateResourcePrefix(
 				callerMethod.DeclaringType.Assembly.GetName()) + path;
@@ -38,33 +38,5 @@ public static class WinUIExtensions
 	{
 		if (t == null) return path;
 		return ApplicationExtensionHost.Current.LocateResourcePrefix(t.GetType().Assembly.GetName()) + path;
-	}
-
-	public static BitmapImage ImageSource(this string path)
-	{
-		return new BitmapImage(new Uri(AssetPath(path)));
-	}
-	public static BitmapImage ImageSource(this string path, Type type)
-	{
-		return new BitmapImage(new Uri(AssetPath(path, type)));
-	}
-
-	public static BitmapImage ImageSource<T>(this string path, T t)
-	{
-		return new BitmapImage(new Uri(AssetPath(path, t)));
-	}
-	public static Uri AssetUri(this string path)
-	{
-		return new Uri(AssetPath(path));
-	}
-
-	public static Uri AssetUri(this string path, Type type)
-	{
-		return new Uri(AssetPath(path, type));
-	}
-
-	public static Uri AssetUri<T>(this string path, T t)
-	{
-		return new Uri(AssetPath(path, t));
 	}
 }

@@ -8,11 +8,22 @@
 		<UseWinUI>true</UseWinUI>
 		<!-- https://github.com/dotnet/maui/issues/5886#issuecomment-1123106200 -->
 		<EnablePreviewMsixTooling>true</EnablePreviewMsixTooling>
-		<Nullable>enable</Nullable>
 		<RuntimeIdentifiers>win10-x86;win10-x64;win10-arm64</RuntimeIdentifiers>
-		<UseWinUI>true</UseWinUI>
-		<IncludeSymbols>true</IncludeSymbols>
-		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+		<!--<IncludeSymbols>true</IncludeSymbols>-->
+
+
+		<Version>0.3.6</Version>
+		<PackageId>CustomExtensions.WinUI</PackageId>
+		<Owner>kitUIN</Owner>
+		<Authors>kitUIN;dnchattan</Authors>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageProjectUrl>https://github.com/kitUIN/CustomExtensions.WinUI/</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/kitUIN/CustomExtensions.WinUI/</RepositoryUrl>
+		<Description>✨ CustomExtensions For WinUI3✨</Description>
+		<Copyright>Copyright 2024</Copyright>
+		<PackageTags>kitUIN;plugin-loader;plugin;extension;winui3</PackageTags>
+		<PackageOutputPath>.\NugetPackages</PackageOutputPath>
 	</PropertyGroup>
 
 	<ItemGroup>
