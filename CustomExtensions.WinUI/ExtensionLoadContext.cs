@@ -20,6 +20,7 @@ internal class ExtensionLoadContext : AssemblyLoadContext
 		string? defaultAssemblyPath = ParentResolver.ResolveAssemblyToPath(assemblyName);
 		if (defaultAssemblyPath != null)
 		{
+			Trace.WriteLine($"Default Loading from ${defaultAssemblyPath}");
 			return Default.LoadFromAssemblyName(assemblyName);
 		}
 		string? assemblyPath = Resolver.ResolveAssemblyToPath(assemblyName);

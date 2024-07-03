@@ -34,9 +34,8 @@ public static partial class ApplicationExtensionHost
 		{
 			return null;
 		}
-
-		return !ResourceManager.Current.AllResourceMaps.TryGetValue(assemblyName, out ResourceMap? map)
-			? null
-			: map.GetSubtree($"{assemblyName}/Resources");
+		return ResourceManager.Current.AllResourceMaps.TryGetValue(assemblyName, out var map) ?
+			map.GetSubtree($"{assemblyName}/Resources") : 
+			ResourceManager.Current.MainResourceMap.GetSubtree($"{assemblyName}/Resources");
 	}
 }

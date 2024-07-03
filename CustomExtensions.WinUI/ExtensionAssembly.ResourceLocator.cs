@@ -34,7 +34,6 @@ internal partial class ExtensionAssembly
 			{
 				return sourceResource.FullName;
 			}
-			throw new FileNotFoundException("Could not find resource", resourceName);
 		}
 		throw new FileNotFoundException("Could not find resource", resourceName);
 	}
