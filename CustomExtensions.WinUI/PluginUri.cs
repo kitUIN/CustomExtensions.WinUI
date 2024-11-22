@@ -3,7 +3,7 @@
 namespace CustomExtensions.WinUI;
 
 [MarkupExtensionReturnType(ReturnType = typeof(Uri))]
-public class PluginUrl : MarkupExtension
+public class PluginUri : MarkupExtension
 {
 	/// <summary>
 	/// Gets or sets the <see cref="string"/> representing the image to display.

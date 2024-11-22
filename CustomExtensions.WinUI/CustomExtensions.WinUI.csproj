@@ -12,7 +12,7 @@
 		<!--<IncludeSymbols>true</IncludeSymbols>-->
 
 
-		<Version>0.3.8</Version>
+		<Version>0.4.1</Version>
 		<PackageId>kitUIN.CustomExtensions.WinUI</PackageId>
 		<Owner>kitUIN</Owner>
 		<Authors>kitUIN;dnchattan</Authors>
@@ -23,7 +23,7 @@
 		<Description>✨ CustomExtensions For WinUI3✨</Description>
 		<Copyright>Copyright 2024</Copyright>
 		<PackageTags>kitUIN;plugin-loader;plugin;extension;winui3</PackageTags>
-		<PackageOutputPath>.\NugetPackages</PackageOutputPath>
+		<PackageOutputPath>..\..\NugetPackages</PackageOutputPath>
 	</PropertyGroup>
 
 	<ItemGroup>
