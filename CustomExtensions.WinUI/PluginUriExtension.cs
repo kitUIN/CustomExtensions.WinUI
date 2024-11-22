@@ -3,7 +3,7 @@ namespace CustomExtensions.WinUI;
 
 
 [MarkupExtensionReturnType(ReturnType = typeof(Uri))]
-internal sealed class PluginUriExtension : MarkupExtension
+public sealed class PluginUriExtension : MarkupExtension
 {
 	public string Source { get; set; }
 

@@ -5,7 +5,7 @@ namespace CustomExtensions.WinUI;
 
 
 [MarkupExtensionReturnType(ReturnType = typeof(ImageSource))]
-internal sealed class PluginImageSourceExtension : MarkupExtension
+public sealed class PluginImageSourceExtension : MarkupExtension
 {
 	public string Source { get; set; }
 
