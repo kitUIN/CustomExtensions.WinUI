@@ -10,6 +10,7 @@ internal partial class ApplicationExtensionHostSingleton<T> : IApplicationExtens
 	private readonly T Application;
 	private readonly ConcurrentDictionary<string, IExtensionAssembly> AssembliesByPath = new();
 	private readonly ConcurrentDictionary<string, IExtensionAssembly> AssembliesByAssemblyName = new();
+	private readonly ConcurrentDictionary<string, IExtensionAssembly> AssembliesByDllName = new();
 
 	public Assembly EntryAssembly { get; }
 	public string HostingProcessDir { get; }
@@ -23,7 +24,7 @@ internal partial class ApplicationExtensionHostSingleton<T> : IApplicationExtens
 
 	public async Task<IExtensionAssembly> LoadExtensionAsync(string pathToAssembly)
 	{
-		IExtensionAssembly asm = GetExtensionAssembly(pathToAssembly);
+		IExtensionAssembly asm = GetExtensionAssembly(new FileInfo(pathToAssembly));
 		await asm.LoadAsync();
 		return asm;
 	}
@@ -40,15 +41,30 @@ internal partial class ApplicationExtensionHostSingleton<T> : IApplicationExtens
 			? throw new EntryPointNotFoundException()
 			: extensionAssembly;
 	}
-	private IExtensionAssembly GetExtensionAssembly(string pathToAssembly)
+	private IExtensionAssembly GetExtensionAssembly(string dllName)
 	{
-		FileInfo fi = new(pathToAssembly);
-		IExtensionAssembly asm = AssembliesByPath.GetOrAdd(fi.FullName, asm => new ExtensionAssembly(pathToAssembly));
+		return !AssembliesByDllName.TryGetValue(dllName, out IExtensionAssembly? extensionAssembly)
+			? throw new EntryPointNotFoundException()
+			: extensionAssembly;
+	}
+
+	private IExtensionAssembly GetExtensionAssembly(FileInfo fi)
+	{
+		IExtensionAssembly asm = AssembliesByPath.GetOrAdd(fi.FullName, asm => new ExtensionAssembly(fi.FullName));
 		_ = AssembliesByAssemblyName.AddOrUpdate(asm.ForeignAssembly.GetName().FullName, asm, (_, _) => asm);
+		string? dllName = asm.ForeignAssembly.GetName().Name;
+		if (dllName is not null)
+		{
+			_ = AssembliesByDllName.AddOrUpdate(dllName, asm, (_, _) => asm);
+		}
 		return asm;
 	}
 	public string LocateResourcePrefix(AssemblyName assemblyName)
 	{
 		return GetExtensionAssembly(assemblyName).SourceResourcePrefix;
+	}	
+	public string LocateResourcePrefix(string dllName)
+	{
+		return GetExtensionAssembly(dllName).SourceResourcePrefix;
 	}
 }

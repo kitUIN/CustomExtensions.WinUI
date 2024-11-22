@@ -10,4 +10,5 @@ public interface IApplicationExtensionHost
 	IDisposable RegisterXamlTypeMetadataProvider(IXamlMetadataProvider provider);
 	Uri LocateResource(object component, [CallerFilePath] string callerFilePath = "");
 	string LocateResourcePrefix(AssemblyName assemblyName);
+	string LocateResourcePrefix(string dllName);
 }
