@@ -46,9 +46,12 @@ public static class WinUIExtensions
 		if (path.StartsWith("ms-plugin://"))
 		{
 			var uri = new Uri(path);
-			var host = uri.Host;
+			var host = path.Split(new[] { "://" }, StringSplitOptions.None)[1]
+										 .Split('/')[0];
 			if (string.IsNullOrEmpty(host)) return "ms-appx://" + uri.AbsolutePath;
-			return ApplicationExtensionHost.Current.LocateResourcePrefix(host) + uri.AbsolutePath;
+			var p = ApplicationExtensionHost.Current.LocateResourcePrefix(host) + uri.AbsolutePath;
+			Trace.TraceWarning(p);
+			return p;
 		}
 		return path;
 	}
