@@ -24,22 +24,14 @@ jobs:
           dotnet-version: |
             6.0.x
 
-      # Versions
-      - uses: dotnet/nbgv@master
-        id: rtk_version
-        with:
-          setAllVars: true
-
-      # Publish RTK
       - name: Build Packages
         run: |
           dotnet restore .\CustomExtensions.WinUI\CustomExtensions.WinUI.csproj
           dotnet build -p:Configuration=Release .\CustomExtensions.WinUI\CustomExtensions.WinUI.csproj
 
-      # NuGet Push
       - name: Push package to Nuget registry
         run: |
-          dotnet nuget push "..\NugetPackages\kitUIN.CustomExtensions.WinUI.*.nupkg" -s "https://api.nuget.org/v3/index.json" -k $NUGET_KEY 
+          dotnet nuget push "..\NugetPackages\kitUIN.CustomExtensions.WinUI.*.nupkg" -s "https://api.nuget.org/v3/index.json" -k $env:NUGET_KEY 
         env:
           NUGET_KEY: ${{ secrets.NUGET_KEY }}
       - name: Create GitHub release
