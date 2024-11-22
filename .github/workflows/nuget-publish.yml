@@ -39,7 +39,7 @@ jobs:
       # NuGet Push
       - name: Push package to Nuget registry
         run: |
-          dotnet nuget push "..\NugetPackages\kitUIN.CustomExtensions.WinUI.*.nupkg" --api-key $NUGET_KEY --source https://api.nuget.org/v3/index.json
+          dotnet nuget push "..\NugetPackages\kitUIN.CustomExtensions.WinUI.*.nupkg" -s "https://api.nuget.org/v3/index.json" -k $NUGET_KEY 
         env:
           NUGET_KEY: ${{ secrets.NUGET_KEY }}
       - name: Create GitHub release
