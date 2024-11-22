@@ -12,7 +12,7 @@
 		<!--<IncludeSymbols>true</IncludeSymbols>-->
 
 
-		<Version>0.4.1</Version>
+		<Version>0.4.2</Version>
 		<PackageId>kitUIN.CustomExtensions.WinUI</PackageId>
 		<Owner>kitUIN</Owner>
 		<Authors>kitUIN;dnchattan</Authors>
