@@ -2,15 +2,8 @@ name: Publish Nuget Packages
 
 on:
   push:
-    branches:
-      - main
-      - release/**
-    paths:
-      - version.json
-      - .github/workflows/nuget-publish.yml
-      - Directory.Build.props
-      - "**/*"
-      - "!**/*.md"
+    tags:
+      - "*.*"
 
 jobs:
   build:
@@ -25,8 +18,7 @@ jobs:
           submodules: recursive
           fetch-depth: 0
 
-      # Install the .NET Core workload
-      - name: Install .NET Core
+      - name: Install .NET
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: |
@@ -41,13 +33,21 @@ jobs:
       # Publish RTK
       - name: Build Packages
         run: |
-          dotnet restore
-          dotnet build -p:Configuration=Release
-          dotnet pack -p:Configuration=Release
+          dotnet restore .\CustomExtensions.WinUI\CustomExtensions.WinUI.csproj
+          dotnet build -p:Configuration=Release .\CustomExtensions.WinUI\CustomExtensions.WinUI.csproj
 
       # NuGet Push
       - name: Push package to Nuget registry
         run: |
-          dotnet nuget push CustomExtensions.WinUI\bin\Release\CustomExtensions.WinUI.${{ steps.rtk_version.outputs.NuGetPackageVersion }}.nupkg -k $env:NUGET_PUBLISH_TOKEN -s https://api.nuget.org/v3/index.json -ss https://www.nuget.org/api/v2/symbolpackage --skip-duplicate
+          dotnet nuget push "..\NugetPackages\kitUIN.CustomExtensions.WinUI.*.nupkg" --api-key $NUGET_KEY --source https://api.nuget.org/v3/index.json
         env:
-          NUGET_PUBLISH_TOKEN: ${{ secrets.NUGET_PUBLISH_TOKEN }}
+          NUGET_KEY: ${{ secrets.NUGET_KEY }}
+      - name: Create GitHub release
+        uses: marvinpinto/action-automatic-releases@latest
+        with:
+          repo_token: "${{ secrets.RELEASE_TOKEN }}"
+          # automatic_release_tag: ${{ github.ref_name }}
+          title: ${{ github.ref_name }}
+          prerelease: false
+          # files: |
+          #   build/libs/*
