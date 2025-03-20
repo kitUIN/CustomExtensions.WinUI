@@ -1,18 +1,18 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net6.0-windows10.0.19041.0</TargetFramework>
+		<TargetFrameworks>net6.0-windows10.0.17763.0;net8.0-windows10.0.17763.0;net9.0-windows10.0.17763.0</TargetFrameworks>
 		<TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<UseWinUI>true</UseWinUI>
 		<!-- https://github.com/dotnet/maui/issues/5886#issuecomment-1123106200 -->
 		<EnablePreviewMsixTooling>true</EnablePreviewMsixTooling>
-		<RuntimeIdentifiers>win10-x86;win10-x64;win10-arm64</RuntimeIdentifiers>
+		<!-- <RuntimeIdentifiers>win10-x86;win10-x64;win10-arm64</RuntimeIdentifiers> -->
 		<!--<IncludeSymbols>true</IncludeSymbols>-->
 
 
-		<Version>0.6.3</Version>
+		<Version>0.3.9</Version>
 		<PackageId>kitUIN.CustomExtensions.WinUI</PackageId>
 		<Owner>kitUIN</Owner>
 		<Authors>kitUIN;dnchattan</Authors>
@@ -21,9 +21,9 @@
 		<PackageProjectUrl>https://github.com/kitUIN/CustomExtensions.WinUI/</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/kitUIN/CustomExtensions.WinUI/</RepositoryUrl>
 		<Description>✨ CustomExtensions For WinUI3✨</Description>
-		<Copyright>Copyright 2024</Copyright>
+		<Copyright>Copyright 2024-2025</Copyright>
 		<PackageTags>kitUIN;plugin-loader;plugin;extension;winui3</PackageTags>
-		<PackageOutputPath>..\..\NugetPackages</PackageOutputPath>
+		<PackageOutputPath>.\NugetPackages</PackageOutputPath>
 	</PropertyGroup>
 
 	<ItemGroup>
